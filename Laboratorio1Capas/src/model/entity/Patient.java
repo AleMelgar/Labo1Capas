@@ -6,13 +6,13 @@ public class Patient {
     private String firstName;
     private String lastName;
     private String dui;
-    private LocalDate birthday;
+    private LocalDate birthdate;
 
-    public Patient(String firstName, String lastName, String dui, LocalDate birthday) {
+    public Patient(String firstName, String lastName, String dui, LocalDate birthdate) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dui = dui;
-        this.birthday = birthday;
+        this.birthdate = birthdate;
     }
 
     public String getFirstName() {
@@ -39,12 +39,12 @@ public class Patient {
         this.dui = dui;
     }
 
-    public LocalDate getBirthday() {
-        return birthday;
+    public LocalDate getBirthdate() {
+        return birthdate;
     }
 
-    public void setBirthday(LocalDate birthday) {
-        this.birthday = birthday;
+    public void setBirthdate(LocalDate birthdate) {
+        this.birthdate = birthdate;
     }
 }
 

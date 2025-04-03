@@ -7,8 +7,8 @@ public class Doctor extends Patient {
     private String specialty;
     private String epicCode;
 
-    public Doctor(String firstName, String lastName, String dui, LocalDate birthday, LocalDate recruitmentDate, String specialty, String epicCode) {
-        super(firstName, lastName, dui, birthday);
+    public Doctor(String firstName, String lastName, String dui, LocalDate birthdate, LocalDate recruitmentDate, String specialty, String epicCode) {
+        super(firstName, lastName, dui, birthdate);
         this.recruitmentDate = recruitmentDate;
         this.specialty = specialty;
         this.epicCode = epicCode;
