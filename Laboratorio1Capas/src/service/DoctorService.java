@@ -38,8 +38,25 @@ public class DoctorService {
         }
     }
 
+    public void listDoctorCodes(){
+        if (doctors.isEmpty()){
+            System.out.println("No doctors registered");
+            return;
+        }
+
+        System.out.println("List of doctor codes:");
+        for (Doctor doctor : doctors) {
+           System.out.println("Name: " + doctor.getFirstName() + " " + doctor.getLastName() + " | Doctor Code: " + doctor.getEpicCode() + " ");
+        }
+    }
+
     public List<Doctor> getDoctorsBySpecialty(String specialty){
         return doctors.stream().filter(doctor -> doctor.getSpecialty().equalsIgnoreCase(specialty)).collect(Collectors.toList());
     }
+
+    public List<String> getAvailableSpecialties() {
+        return doctors.stream().map(Doctor::getSpecialty).distinct().collect(Collectors.toList());
+    }
+
 
 }

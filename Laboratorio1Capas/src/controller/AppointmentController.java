@@ -44,8 +44,19 @@ public class AppointmentController {
         Patient patient = patients.get(patientIndex);
 
         // Doctors by specialty
-        System.out.println("Write the specialty you need: ");
-        String specialty = scanner.nextLine();
+        List<String> specialties = doctorService.getAvailableSpecialties();
+
+        if (specialties.isEmpty()) {
+            System.out.println("No doctors available");
+            return;
+        }
+        System.out.println("Choose a specialty: ");
+        for (int i = 0; i < specialties.size(); i++) {
+            System.out.println((i + 1) + ". " + specialties.get(i));
+        }
+        int specialtyIndex = scanner.nextInt() - 1;
+        scanner.nextLine();
+        String specialty = specialties.get(specialtyIndex);
 
         List<Doctor> doctors = doctorService.getDoctorsBySpecialty(specialty);
         if (doctors.isEmpty()) {
@@ -100,6 +111,8 @@ public class AppointmentController {
     }
 
     public void searchAppointmentsByDoctor() {
+
+        doctorService.listDoctorCodes();
         System.out.println("Enter the doctor's Epic Code: ");
         String epicCode = scanner.nextLine();
 
@@ -135,5 +148,28 @@ public class AppointmentController {
                 System.out.println(appointment.showInfo());
             }
         }
+    }
+
+    public void deleteAppointment(){
+        List<Appointment> appointments = appointmentService.getAllAppointments();
+
+        if (appointments.isEmpty()){
+            System.out.println("No appointments registered");
+            return;
+        }
+
+        System.out.println("Choose an appointment to delete: ");
+        for (int i = 0; i < appointments.size(); i++){
+            System.out.println((i+1)+". "+appointments.get(i).showInfo());
+        }
+        int appointmentIndex = scanner.nextInt()-1;
+        scanner.nextLine();
+        if(appointmentIndex<0 || appointmentIndex>=appointments.size()){
+            System.out.println("Invalid appointment index");
+        }
+
+        Appointment selected = appointments.get(appointmentIndex);
+        appointmentService.deleteAppointment(selected);
+        System.out.println("Appointment deleted successfully");
     }
 }

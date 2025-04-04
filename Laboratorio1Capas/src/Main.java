@@ -23,9 +23,10 @@ public class Main {
             System.out.println("4. List all doctors");
             System.out.println("5. Schedule appointment");
             System.out.println("6. List all appointments");
-            System.out.println("7. Search appointments by doctor");
-            System.out.println("8. Search appointments by date");
-            System.out.println("9. Exit");
+            System.out.println("7. Delete appointment");
+            System.out.println("8. Search appointments by doctor");
+            System.out.println("9. Search appointments by date");
+            System.out.println("10. Exit");
 
             int option = scanner.nextInt();
             scanner.nextLine();
@@ -50,12 +51,14 @@ public class Main {
                     appointmentController.listAllAppointments();
                     break;
                 case 7:
-                    appointmentController.searchAppointmentsByDoctor();
+                    appointmentController.deleteAppointment();
                     break;
                 case 8:
-                    appointmentController.searchAppointmentsByDate();
+                    appointmentController.searchAppointmentsByDoctor();
                     break;
                 case 9:
+                    appointmentController.searchAppointmentsByDate();
+                case 10:
                     System.out.println("Exiting program...");
                     System.exit(0);
                 default:

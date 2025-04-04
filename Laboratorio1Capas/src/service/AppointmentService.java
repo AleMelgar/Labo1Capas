@@ -81,4 +81,9 @@ public class AppointmentService {
           System.out.println(appointment.showInfo());
         }
     }
+
+    public void deleteAppointment(Appointment appointment){
+        appointments.remove(appointment);
+    }
+
 }
