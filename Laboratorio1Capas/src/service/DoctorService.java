@@ -13,10 +13,10 @@ public class DoctorService {
         this.doctors = new ArrayList<>();
     }
 
-    public void addDoctor(String firstName, String lastName, String dui, LocalDate birthdate, String specialty, String recruitmentDate) {
-        Doctor newDoctor = new Doctor(firstName, lastName, dui, birthdate, specialty, recruitmentDate);
+    public void addDoctor(String firstName, String lastName, String dui, LocalDate birthdate, LocalDate recruitmentDate, String specialty, String epicCode) {
+        Doctor newDoctor = new Doctor(firstName, lastName, dui, birthdate, recruitmentDate, specialty, epicCode);
         doctors.add(newDoctor);
-        System.out.println("Doctor added successfully! Total doctors: " + doctors.size());
+        System.out.println("Patient added");
     }
 
 

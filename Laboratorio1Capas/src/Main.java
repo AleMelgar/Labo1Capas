@@ -32,12 +32,10 @@ public class Main {
                     patientService.listPatients();
                     break;
                 case 3:
-                    System.out.println("Adding new doctor...");
                     doctorController.addDoctor();
                     break;
                 case 4:
-                    System.out.println("Listing all doctors...");
-                    doctorController.listDoctors();
+                    doctorService.listDoctors();
                     break;
 
                 case 5:
