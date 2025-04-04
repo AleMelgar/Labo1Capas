@@ -1,13 +1,16 @@
 package controller;
 
+import model.entity.Appointment;
 import model.entity.Doctor;
 import model.entity.Patient;
+import service.AppointmentService;
 import service.DoctorService;
 import service.PatientService;
-import service.AppointmentService;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -40,7 +43,7 @@ public class AppointmentController {
         scanner.nextLine();
         Patient patient = patients.get(patientIndex);
 
-        //Doctors by specialty
+        // Doctors by specialty
         System.out.println("Write the specialty you need: ");
         String specialty = scanner.nextLine();
 
@@ -57,18 +60,80 @@ public class AppointmentController {
         scanner.nextLine();
         Doctor doctor = doctors.get(doctorIndex);
 
-        //Date
-        System.out.println("Choose a date: (dd/MM/yyyy): ");
-        LocalDate date = LocalDate.parse(scanner.nextLine());
+        // Date
+        System.out.println("Choose a date (dd/MM/yyyy): ");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        LocalDate date;
+        while (true) {
+            try {
+                date = LocalDate.parse(scanner.nextLine(), formatter);
+                break;
+            } catch (DateTimeParseException e) {
+                System.out.println("Invalid format. Please enter the date in dd/MM/yyyy format: ");
+            }
+        }
+
         boolean today = date.equals(LocalDate.now());
 
         LocalTime hour = null;
-        if (today){
-            System.out.println("Choose an hour: (HH:mm): ");
-            hour = LocalTime.parse(scanner.nextLine());
+
+        if (today) {
+            System.out.println("Choose an hour (HH:mm): ");
+            DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+
+            while (true) {
+                try {
+                    hour = LocalTime.parse(scanner.nextLine(), timeFormatter);
+                    break;
+                } catch (DateTimeParseException e) {
+                    System.out.println("Invalid format. Please enter the time in HH:mm format: ");
+                }
+            }
         }
 
         appointmentService.book(doctor, patient, specialty, date, today, hour);
+    }
 
+    public void listAllAppointments() {
+        appointmentService.listAllAppointments();
+    }
+
+    public void searchAppointmentsByDoctor() {
+        System.out.println("Enter the doctor's Epic Code: ");
+        String epicCode = scanner.nextLine();
+
+        List<Appointment> appointments = appointmentService.getAppointmentsByDoctor(epicCode);
+        if (appointments.isEmpty()) {
+            System.out.println("No appointments found for this doctor.");
+        } else {
+            for (Appointment appointment : appointments) {
+                System.out.println(appointment.showInfo());
+            }
+        }
+    }
+
+    public void searchAppointmentsByDate() {
+        System.out.println("Enter a date (dd/MM/yyyy): ");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        LocalDate date;
+        while (true) {
+            try {
+                date = LocalDate.parse(scanner.nextLine(), formatter);
+                break;
+            } catch (DateTimeParseException e) {
+                System.out.println("Invalid format. Please enter the date in dd/MM/yyyy format: ");
+            }
+        }
+
+        List<Appointment> appointments = appointmentService.getAppointmentsByDate(date);
+        if (appointments.isEmpty()) {
+            System.out.println("No appointments found for this date.");
+        } else {
+            for (Appointment appointment : appointments) {
+                System.out.println(appointment.showInfo());
+            }
+        }
     }
 }
