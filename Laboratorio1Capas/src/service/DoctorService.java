@@ -5,6 +5,7 @@ import model.entity.Doctor;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DoctorService {
     private List<Doctor> doctors;
@@ -35,6 +36,10 @@ public class DoctorService {
                     " | Recruitment Date: " + doctor.getRecruitmentDate() +
                     " | Epic Code: " + doctor.getEpicCode());
         }
+    }
+
+    public List<Doctor> getDoctorsBySpecialty(String specialty){
+        return doctors.stream().filter(doctor -> doctor.getSpecialty().equalsIgnoreCase(specialty)).collect(Collectors.toList());
     }
 
 }

@@ -29,4 +29,8 @@ public class PatientService {
             System.out.println("Name " + patient.getFirstName() + " " + patient.getLastName() + " DUI " + patient.getDui() + " Birthdate " + patient.getBirthdate());
         }
     }
+
+    public List<Patient> getPatients(){
+        return patients;
+    }
 }
