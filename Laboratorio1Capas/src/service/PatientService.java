@@ -26,7 +26,9 @@ public class PatientService {
 
         System.out.println("List of patients:");
         for (Patient patient : patients) {
-            System.out.println("Name " + patient.getFirstName() + " " + patient.getLastName() + " DUI " + patient.getDui() + " Birthdate " + patient.getBirthdate());
+            System.out.println("Name: " + patient.getFirstName() + " " + patient.getLastName() +
+                    " | DUI: " + patient.getDui() +
+                    " | Birthdate: " + patient.getBirthdate());
         }
     }
 

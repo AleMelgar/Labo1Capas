@@ -44,7 +44,7 @@ public class AppointmentService {
 
     private boolean conflict(Doctor doctor, Patient patient, LocalDate date, LocalTime hour){
         return appointments.stream().anyMatch(c ->c.getDate().equals(date) && c.getHour().equals(hour) &&
-                (c.getDoctor().getEpicCode().equals(doctor.getEpicCode()) || c.getPatient().getDui().equals(patient.getDui())));
+                (c.getDoctor().getDoctorCode().equals(doctor.getDoctorCode()) || c.getPatient().getDui().equals(patient.getDui())));
     }
 
     private LocalTime getFreeHour(LocalDate date, Doctor doctor, Patient patient){
@@ -64,8 +64,8 @@ public class AppointmentService {
         return appointments;
     }
 
-    public List<Appointment> getAppointmentsByDoctor(String epicCode){
-        return appointments.stream().filter(c -> c.getDoctor().getEpicCode().equalsIgnoreCase(epicCode)).collect(Collectors.toList());
+    public List<Appointment> getAppointmentsByDoctor(String doctorCode){
+        return appointments.stream().filter(c -> c.getDoctor().getDoctorCode().equalsIgnoreCase(doctorCode)).collect(Collectors.toList());
     }
 
     public List<Appointment> getAppointmentsByDate(LocalDate date){

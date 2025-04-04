@@ -5,13 +5,13 @@ import java.time.LocalDate;
 public class Doctor extends Patient {
     private LocalDate recruitmentDate;
     private String specialty;
-    private String epicCode;
+    private String doctorCode;
 
-    public Doctor(String firstName, String lastName, String dui, LocalDate birthdate, LocalDate recruitmentDate, String specialty, String epicCode) {
+    public Doctor(String firstName, String lastName, String dui, LocalDate birthdate, LocalDate recruitmentDate, String specialty, String doctorCode) {
         super(firstName, lastName, dui, birthdate);
         this.recruitmentDate = recruitmentDate;
         this.specialty = specialty;
-        this.epicCode = epicCode;
+        this.doctorCode = doctorCode;
     }
 
     public LocalDate getRecruitmentDate() {
@@ -30,12 +30,12 @@ public class Doctor extends Patient {
         this.specialty = specialty;
     }
 
-    public String getEpicCode() {
-        return epicCode;
+    public String getDoctorCode() {
+        return doctorCode;
     }
 
-    public void setEpicCode(String epicCode) {
-        this.epicCode = epicCode;
+    public void setDoctorCode(String doctorCode) {
+        this.doctorCode = doctorCode;
     }
 
 }

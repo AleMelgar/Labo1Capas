@@ -14,8 +14,8 @@ public class DoctorService {
         this.doctors = new ArrayList<>();
     }
 
-    public void addDoctor(String firstName, String lastName, String dui, LocalDate birthdate, LocalDate recruitmentDate, String specialty, String epicCode) {
-        Doctor newDoctor = new Doctor(firstName, lastName, dui, birthdate, recruitmentDate, specialty, epicCode);
+    public void addDoctor(String firstName, String lastName, String dui, LocalDate birthdate, LocalDate recruitmentDate, String specialty, String doctorCode) {
+        Doctor newDoctor = new Doctor(firstName, lastName, dui, birthdate, recruitmentDate, specialty, doctorCode);
         doctors.add(newDoctor);
         System.out.println("Patient added");
     }
@@ -34,7 +34,7 @@ public class DoctorService {
                     " | Birthdate: " + doctor.getBirthdate() +
                     " | Specialty: " + doctor.getSpecialty() +
                     " | Recruitment Date: " + doctor.getRecruitmentDate() +
-                    " | Epic Code: " + doctor.getEpicCode());
+                    " | Doctor Code: " + doctor.getDoctorCode());
         }
     }
 
@@ -46,7 +46,7 @@ public class DoctorService {
 
         System.out.println("List of doctor codes:");
         for (Doctor doctor : doctors) {
-           System.out.println("Name: " + doctor.getFirstName() + " " + doctor.getLastName() + " | Doctor Code: " + doctor.getEpicCode() + " ");
+           System.out.println("Name: " + doctor.getFirstName() + " " + doctor.getLastName() + " | Doctor Code: " + doctor.getDoctorCode() + " ");
         }
     }
 

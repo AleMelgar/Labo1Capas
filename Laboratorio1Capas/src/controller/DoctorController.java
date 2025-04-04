@@ -25,7 +25,7 @@ public class DoctorController {
         return random.nextInt(10);
     }
 
-    private String generateEpicCode() {
+    private String generateDoctorCode() {
         return "ZNH-" + randomDigit() + randomLetter() + randomDigit() + "-" + "MD-" + randomLetter() + randomDigit();
     }
 
@@ -61,9 +61,9 @@ public class DoctorController {
             System.out.println("Invalid date");
         }
 
-        String epicCode = generateEpicCode();
+        String doctorCode = generateDoctorCode();
 
-        doctorService.addDoctor(firstName, lastName, dui, birthdate, recruitmentDate, specialty, epicCode);
+        doctorService.addDoctor(firstName, lastName, dui, birthdate, recruitmentDate, specialty, doctorCode);
         System.out.println("Doctor added successfully");
     }
 

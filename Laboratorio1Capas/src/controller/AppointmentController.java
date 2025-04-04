@@ -113,10 +113,10 @@ public class AppointmentController {
     public void searchAppointmentsByDoctor() {
 
         doctorService.listDoctorCodes();
-        System.out.println("Enter the doctor's Epic Code: ");
-        String epicCode = scanner.nextLine();
+        System.out.println("Enter the doctor's code: ");
+        String doctorCode = scanner.nextLine();
 
-        List<Appointment> appointments = appointmentService.getAppointmentsByDoctor(epicCode);
+        List<Appointment> appointments = appointmentService.getAppointmentsByDoctor(doctorCode);
         if (appointments.isEmpty()) {
             System.out.println("No appointments found for this doctor.");
         } else {

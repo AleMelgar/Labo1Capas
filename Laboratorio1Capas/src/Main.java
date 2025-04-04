@@ -3,6 +3,7 @@ import controller.DoctorController;
 import controller.PatientController;
 import service.DoctorService;
 import service.PatientService;
+import utils.MenuUtils;
 
 import java.util.Scanner;
 
@@ -17,48 +18,25 @@ public class Main {
 
         while (true) {
             System.out.println("\n=== Main Menu ===");
-            System.out.println("1. Add new patient");
-            System.out.println("2. List all patients");
-            System.out.println("3. Add new doctor");
-            System.out.println("4. List all doctors");
-            System.out.println("5. Schedule appointment");
-            System.out.println("6. List all appointments");
-            System.out.println("7. Delete appointment");
-            System.out.println("8. Search appointments by doctor");
-            System.out.println("9. Search appointments by date");
-            System.out.println("10. Exit");
+            System.out.println("1. Doctors");
+            System.out.println("2. Patients");
+            System.out.println("3. Appointments");
+            System.out.println("4. Exit");
 
             int option = scanner.nextInt();
             scanner.nextLine();
 
             switch (option) {
                 case 1:
-                    patientController.addPatient();
+                    MenuUtils.doctorsMenu(scanner, doctorController, doctorService);
                     break;
                 case 2:
-                    patientService.listPatients();
+                    MenuUtils.patientsMenu(scanner, patientController, patientService);
                     break;
                 case 3:
-                    doctorController.addDoctor();
+                    MenuUtils.appointmentsMenu(scanner, appointmentController);
                     break;
                 case 4:
-                    doctorService.listDoctors();
-                    break;
-                case 5:
-                    appointmentController.addAppointment();
-                    break;
-                case 6:
-                    appointmentController.listAllAppointments();
-                    break;
-                case 7:
-                    appointmentController.deleteAppointment();
-                    break;
-                case 8:
-                    appointmentController.searchAppointmentsByDoctor();
-                    break;
-                case 9:
-                    appointmentController.searchAppointmentsByDate();
-                case 10:
                     System.out.println("Exiting program...");
                     System.exit(0);
                 default:

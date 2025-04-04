@@ -17,7 +17,7 @@ public class Appointment {
         this.specialty = specialty;
         this.date = date;
         this.hour = hour;
-        this.assisted = false;
+        this.assisted = true;
     }
 
     public Doctor getDoctor() {
@@ -70,7 +70,7 @@ public class Appointment {
 
     public String showInfo(){
         return String.format(
-          "Appointment - Date: %s | Hour: %s | Doctor: %s | Patient: %s | Specialty: %s | Assisted: %s",
+          "Appointment - Date: %s | Hour: %s | Doctor: %s | Patient: %s | Specialty: %s | Confirmed: %s",
           date, hour, doctor.getFirstName() + " " + doctor.getLastName(), patient.getFirstName() + " " + patient.getLastName(), specialty, assisted ? "Yes":"No"
         );
     }
