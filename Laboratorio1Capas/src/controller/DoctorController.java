@@ -1,6 +1,8 @@
 package controller;
 
 import service.DoctorService;
+import utils.DuiValidator;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
@@ -47,7 +49,7 @@ public class DoctorController {
         }
 
         System.out.println("Doctor DUI: ");
-        String dui = scanner.nextLine();
+        String dui = DuiValidator.requestValidDui();
 
         System.out.println("Doctor specialty: ");
         String specialty = scanner.nextLine();

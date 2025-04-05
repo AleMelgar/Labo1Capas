@@ -22,6 +22,7 @@ public class PatientService {
     public void listPatients(){
         if (patients.isEmpty()){
             System.out.println("No patients registered");
+            return;
         }
 
         System.out.println("List of patients:");

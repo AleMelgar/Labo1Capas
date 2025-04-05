@@ -5,6 +5,7 @@ import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import service.PatientService;
+import utils.DuiValidator;
 
 public class PatientController {
     private Scanner scanner;
@@ -36,12 +37,14 @@ public class PatientController {
         assert birthdate != null;
         int age = Period.between(birthdate, LocalDate.now()).getYears();
         String dui;
+
         if (age < 18) {
             dui = "000000000";
         } else {
             System.out.println("Patient DUI: ");
-            dui = scanner.nextLine();
+            dui = DuiValidator.requestValidDui();
         }
+
 
         patientService.addPatient(firstName, lastName, dui, birthdate);
         System.out.println("Patient added successfully");
