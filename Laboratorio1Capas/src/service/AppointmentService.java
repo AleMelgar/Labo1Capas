@@ -20,14 +20,23 @@ public class AppointmentService {
     public void book(Doctor doctor, Patient patient, String specialty, LocalDate date, boolean today, LocalTime hourEntered){
         LocalTime hourAssigned;
 
-        if (today){
+        if (today) {
             hourAssigned = hourEntered;
 
-            if(conflict(doctor, patient, date, hourAssigned)){
-                System.out.println("This appointment is already booked");
+            LocalTime start = LocalTime.of(8, 0);
+            LocalTime end = LocalTime.of(16, 0);
+
+            if (hourAssigned.isBefore(start) || hourAssigned.isAfter(end)) {
+                System.out.println("The doctor is out of service, please choose between 8:00 and 16:00 ");
                 return;
             }
-        } else {
+
+            if (conflict(doctor, patient, date, hourAssigned)) {
+                System.out.println("This appointment is already booked.");
+                return;
+            }
+
+    } else {
             hourAssigned = getFreeHour(date, doctor, patient);
 
             if (hourAssigned == null){
@@ -42,10 +51,23 @@ public class AppointmentService {
         System.out.println(newAppointment.showInfo());
     }
 
-    private boolean conflict(Doctor doctor, Patient patient, LocalDate date, LocalTime hour){
-        return appointments.stream().anyMatch(c ->c.getDate().equals(date) && c.getHour().equals(hour) &&
-                (c.getDoctor().getDoctorCode().equals(doctor.getDoctorCode()) || c.getPatient().getDui().equals(patient.getDui())));
+    private boolean conflict(Doctor doctor, Patient patient, LocalDate date, LocalTime hour) {
+        LocalTime endHour = hour.plusHours(1);
+
+        return appointments.stream().anyMatch(c -> {
+            if (!c.getDate().equals(date)) return false;
+
+            LocalTime existingStart = c.getHour();
+            LocalTime existingEnd = existingStart.plusHours(1);
+
+            boolean overlaps = hour.isBefore(existingEnd) && endHour.isAfter(existingStart);
+            boolean sameDoctor = c.getDoctor().getDoctorCode().equals(doctor.getDoctorCode());
+            boolean samePatient = c.getPatient().getDui().equals(patient.getDui());
+
+            return overlaps && (sameDoctor || samePatient);
+        });
     }
+
 
     private LocalTime getFreeHour(LocalDate date, Doctor doctor, Patient patient){
         LocalTime hour = LocalTime.of(8, 0);
